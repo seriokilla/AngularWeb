@@ -5,6 +5,9 @@ var app = express();
 var mongojs = require("mongojs");
 var db = mongojs("contactlist", ["contactlist"]);
 
+var bodyParser = require("body-parser");
+app.use(bodyParser.json());
+
 // test to send Hello World to all req
 // app.get('/', function(req, res){
 // 	res.send("hello world");
@@ -24,6 +27,7 @@ app.get("/contactlist", function(req, res){
 
 
 app.post("/contactlist", function(req,res){
+    console.log("POST received: ")
     console.log(req.body);
 });
 
