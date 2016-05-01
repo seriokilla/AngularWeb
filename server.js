@@ -2,6 +2,8 @@
 var express = require("express");
 var app = express();
 
+var mongojs = require("mongojs");
+var db = mongojs("contactlist", ["contactlist"]);
 
 // test to send Hello World to all req
 // app.get('/', function(req, res){
@@ -12,9 +14,13 @@ var app = express();
 app.use(express.static(__dirname + "/public"));
 app.get("/contactlist", function(req, res){
     console.log("rcved get request");
-      
-    var contactlist = require("./data/contacts.json");
-    res.json(contactlist);
+    
+    
+    db.contactlist.find(function(err, docs){
+        console.log(docs);
+        res.json(docs);
+    });
+   
 });
 
 app.listen(3000);
