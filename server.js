@@ -15,24 +15,24 @@ app.use(bodyParser.json());
 
 // use static pages from location
 app.use(express.static(__dirname + "/public"));
-app.get("/contactlist", function(req, res){
+app.get("/contactlist", function (req, res) {
     console.log("received a GET request.");
-    
-    db.contactlist.find(function(err, docs){
+
+    db.contactlist.find(function (err, docs) {
         console.log(docs);
         res.json(docs);
     });
-   
+
 });
 
 
-app.post("/contactlist", function(req,res){
+app.post("/contactlist", function (req, res) {
     console.log("POST received: ")
     console.log(req.body);
-    db.contactlist.insert(req.body, function(error, doc){
+    db.contactlist.insert(req.body, function (error, doc) {
         res.json(doc);
     });
-    
+
 });
 
 app.listen(3000);
